@@ -10,8 +10,8 @@ import pathlib
 
 import pathlib
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+
+
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 # ─────────────────────────────────────────────────────────
