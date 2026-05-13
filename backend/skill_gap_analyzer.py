@@ -5,14 +5,14 @@ Returns structured gap analysis with priority levels and learning estimates
 
 from typing import List, Dict, Any
 import json
+
+
+
 import pathlib
 
 
-import pathlib
 
-
-
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 # ─────────────────────────────────────────────────────────
 # Skill normalization (handle capitalization / aliases)
