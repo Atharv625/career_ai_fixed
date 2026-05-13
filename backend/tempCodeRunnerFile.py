@@ -64,20 +64,19 @@ async def _seed_initial_data():
     import json
     import pathlib
 
-    DATA_DIR = pathlib.BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+    BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+    DATA_DIR = BASE_DIR / "data"
 
     careers_col = get_careers_collection()
     if await careers_col.count_documents({}) == 0:
-        with open(data_dir / "careers.json") as f:
+        with open(DATA_DIR / "careers.json") as f:
             careers = json.load(f)
         await careers_col.insert_many(careers)
         print(f"📚 Seeded {len(careers)} careers into MongoDB")
 
     courses_col = get_courses_collection()
     if await courses_col.count_documents({}) == 0:
-        with open(data_dir / "courses.json") as f:
+        with open(DATA_DIR / "courses.json") as f:
             courses = json.load(f)
         await courses_col.insert_many(courses)
         print(f"🎓 Seeded {len(courses)} courses into MongoDB")
