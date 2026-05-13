@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 # CONFIGURATION  (read at import time – no heavy work yet)
 # ═══════════════════════════════════════════════════════════
 
-DATA_DIR              = pathlib.Path(os.getenv("DATA_DIR", "/data"))
+DATA_DIR              = pathlib.Path(os.getenv("DATA_DIR", "data"))
 MAX_SESSIONS          = int(os.getenv("MAX_SESSIONS",          500))
 MAX_MESSAGE_LENGTH    = int(os.getenv("MAX_MESSAGE_LENGTH",   2000))
 MIN_MESSAGE_LENGTH    = int(os.getenv("MIN_MESSAGE_LENGTH",      3))
