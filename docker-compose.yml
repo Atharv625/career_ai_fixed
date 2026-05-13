@@ -1,0 +1,74 @@
+version: "3.9"
+
+# ─────────────────────────────────────────────────────────────────
+#  Career Advisor AI – Docker Compose
+#  Local dev + Docker Desktop (Windows/WSL2) compatible
+# ─────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── MongoDB ──────────────────────────────────────────────────
+  mongodb:
+    image: mongo:7.0
+    container_name: career_advisor_mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: career_advisor
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s   # give Mongo time to init before first check
+
+  # ── Backend ──────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: career_advisor_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # ← Reads from the .env file in the project root
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-changeme_in_production}
+      # ✅ Use service name "mongodb" – NOT localhost
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DB: career_advisor
+      DATA_DIR: /data
+      # Comma-separated origins; use * for local dev
+      ALLOWED_ORIGINS: "*"
+    volumes:
+      # Mount data files read-only so the backend can seed + query them
+      - ./data:/data:ro
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ── Frontend ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: career_advisor_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  mongo_data:

@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: career-advisor-backend
+    runtime: docker
+    # Build from the repo root so we can include the data/ folder
+    dockerContext: .
+    dockerfilePath: ./backend/Dockerfile.render
+    plan: free
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: MONGODB_URL
+        sync: false
+      - key: MONGODB_DB
+        value: career_advisor
+      - key: DATA_DIR
+        value: /data
