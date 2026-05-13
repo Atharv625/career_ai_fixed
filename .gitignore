@@ -2,6 +2,9 @@
 .env
 *.env.local
 
+frontend/.env
+backend/.env
+
 # Python
 __pycache__/
 *.pyc

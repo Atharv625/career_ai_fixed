@@ -7,7 +7,8 @@ from typing import List, Dict, Any
 import json
 import pathlib
 
-DATA_DIR = pathlib.Path("/data")
+DATA_DIR = pathlib.BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
 
 
 # ─────────────────────────────────────────────────────────
