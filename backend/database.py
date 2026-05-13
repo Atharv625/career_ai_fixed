@@ -77,12 +77,12 @@ def get_chat_history_collection():
 async def _seed_initial_data() -> None:
     """Load careers.json and courses.json into MongoDB if collections are empty."""
     BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
-    logger.info(f"Seeding from: {data_dir}")
+    DATA_DIR = BASE_DIR / "data"
+    logger.info(f"Seeding from: {DATA_DIR}")
 
     careers_col = get_careers_collection()
     if await careers_col.count_documents({}) == 0:
-        careers_file = data_dir / "careers.json"
+        careers_file = DATA_DIR / "careers.json"
         if careers_file.exists():
             careers = json.loads(careers_file.read_text())
             await careers_col.insert_many(careers)
