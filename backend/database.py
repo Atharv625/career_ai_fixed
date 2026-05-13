@@ -92,7 +92,7 @@ async def _seed_initial_data() -> None:
 
     courses_col = get_courses_collection()
     if await courses_col.count_documents({}) == 0:
-        courses_file = data_dir / "courses.json"
+        courses_file = DATA_DIR / "courses.json"
         if courses_file.exists():
             courses = json.loads(courses_file.read_text())
             await courses_col.insert_many(courses)
