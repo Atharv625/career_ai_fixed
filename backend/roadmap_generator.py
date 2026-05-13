@@ -9,7 +9,12 @@ import json
 import pathlib
 from skill_gap_analyzer import analyze_skill_gap, SKILL_LEARNING_TIME
 
-DATA_DIR = pathlib.BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+import pathlib
+
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 

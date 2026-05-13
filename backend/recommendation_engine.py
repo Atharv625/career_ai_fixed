@@ -10,7 +10,9 @@ import json
 import pathlib
 from skill_gap_analyzer import compute_skill_match_score, normalize_skills
 
-DATA_DIR = pathlib.BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+DATA_DIR = pathl            
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
 

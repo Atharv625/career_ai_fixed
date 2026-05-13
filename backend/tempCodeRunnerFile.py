@@ -65,6 +65,7 @@ async def _seed_initial_data():
     import pathlib
 
     DATA_DIR = pathlib.BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 
     careers_col = get_careers_collection()
