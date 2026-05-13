@@ -6,8 +6,8 @@ from skill_gap_analyzer import analyze_skill_gap, analyze_multiple_careers
 import json, pathlib
 
 router = APIRouter()
-DATA_DIR = pathlib.Path(__file__).parent.parent.parent / "data"
-
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
 class SkillGapRequest(BaseModel):
     user_skills: List[str]
     career_name: str
@@ -18,8 +18,9 @@ class MultiCareerGapRequest(BaseModel):
 @router.post("/analyze")
 async def analyze_gap(req: SkillGapRequest):
     try:
-        with open(DATA_DIR / "careers.json") as f:
-            all_careers = json.load(f)
+        CAREERS_FILE = DATA_DIR / "careers.json"
+
+        with CAREERS_FILE.open() as f:            all_careers = json.load(f)
         career = next(
             (c for c in all_careers if c["career_name"].lower() == req.career_name.lower()),
             None
