@@ -11,7 +11,7 @@ import pathlib
 from skill_gap_analyzer import compute_skill_match_score, normalize_skills
 
 
-BASE_DIR = pathlib.Path(__file__).resolve()
+BASE_DIR = pathlib.Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 
 
