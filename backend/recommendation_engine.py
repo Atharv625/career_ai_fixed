@@ -11,9 +11,13 @@ import pathlib
 from skill_gap_analyzer import compute_skill_match_score, normalize_skills
 
 
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve()
 DATA_DIR = BASE_DIR / "data"
 
+
+
+CAREERS_FILE = DATA_DIR / "careers.json"
+COURSES_FILE = DATA_DIR / "courses.json"
 
 # ─────────────────────────────────────────────────────────
 # Interest-to-Career Mapping
